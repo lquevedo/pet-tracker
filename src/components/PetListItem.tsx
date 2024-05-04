@@ -19,7 +19,17 @@ const PetListItem = ({ data }: Props) => {
   const [hasBeenEveningFed, setHasBeenEveningFed] = useState(data.eveningFeed);
   const [hasHadTreat, setHasHadTreat] = useState(data.treat);
 
+  const updateLastUpdated = async () => {
+    const date = new Date();
+    const petsRef = doc(db, "pets", data.id);
+
+    await updateDoc(petsRef, {
+      lastUpdated: date.toLocaleDateString("en-US"),
+    });
+  };
+
   const updateMorningFed = async (value: boolean) => {
+    updateLastUpdated();
     setHasBeenMorningFed(value);
     const petsRef = doc(db, "pets", data.id);
 
@@ -29,6 +39,7 @@ const PetListItem = ({ data }: Props) => {
   };
 
   const updateEveningFed = async (value: boolean) => {
+    updateLastUpdated();
     setHasBeenEveningFed(value);
     const petsRef = doc(db, "pets", data.id);
 
@@ -38,6 +49,7 @@ const PetListItem = ({ data }: Props) => {
   };
 
   const updateTreat = async (value: boolean) => {
+    updateLastUpdated();
     setHasHadTreat(value);
     const petsRef = doc(db, "pets", data.id);
 
@@ -46,10 +58,18 @@ const PetListItem = ({ data }: Props) => {
     });
   };
 
+  console.log(data);
+
   return (
     <div className="collapse bg-base-200">
       <input type="checkbox" />
-      <div className="collapse-title text-xl font-medium">{data.name}</div>
+      <div
+        className={`collapse-title text-xl font-bold text-white ${
+          data.name === "bubz" ? "bg-bubz" : "bg-bear"
+        } bg-cover bg-center h-32 leading-[96px]`}
+      >
+        {data.name}
+      </div>
       <div className="collapse-content">
         <div className="form-control">
           <label className="label cursor-pointer">

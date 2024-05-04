@@ -2,7 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        bubz: "url('/bubz.jpeg')",
+        bear: "url('/bear.jpeg')",
+      },
+    },
   },
   // eslint-disable-next-line
   plugins: [require("daisyui")],
