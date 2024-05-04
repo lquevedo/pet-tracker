@@ -2,7 +2,7 @@
   "name": "dog-tracker",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://lquevedo.github.io/pet-tracker/",
+  "homepage": "https://lquevedo.github.io/pet-tracker",
   "type": "module",
   "scripts": {
     "dev": "vite",
